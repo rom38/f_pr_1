@@ -1,0 +1,6 @@
+.selected-country {
+background-color: yellow !important;
+};
+td:has(>tr.selected-country) {
+    background-color: yellow !important;
+    }
