@@ -1,9 +1,7 @@
-import { Component } from "react";
 import "../styles/Main.css";
 import Countries from "./Countries";
 import Alerts from "./Alerts";
-import TownSelect from "./TownSelect";
-import RegionSelect from "./RegionSelect";
+import PlaceSelect from "./PlaceSelect";
 
 function Main() {
     const alertText = "Ужас!";
@@ -11,8 +9,8 @@ function Main() {
         <main>
             <h1>Hello World</h1>
             <Alerts>{alertText}</Alerts>
-            <TownSelect/>
-            <RegionSelect/>
+            <PlaceSelect />
+
 
             <Countries />
         </main>
