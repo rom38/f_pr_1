@@ -44,7 +44,7 @@ function TownSelect({ towns, townSelected, setTownSelected }) {
                 <span>{`Широта: ${townSelected["geo_lat"]}, Долгота: ${townSelected["geo_lon"]}`}</span>
             </label>
 
-            {towns.slice(1, 7).map((town) => (
+            {towns.slice(0, 7).map((town) => (
                 <li key={town["fias_id"]}>{town["city"]}</li>
             ))}
         </ul>
