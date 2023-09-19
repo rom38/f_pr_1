@@ -1,17 +1,18 @@
-import { Component, Fragment, useState } from "react";
+import { Component, Fragment, useState, useId } from "react";
 import { Button } from "react-bootstrap";
 import PropTypes, { array, object } from "prop-types";
 import "../styles/RegionSelect.css";
 import towns from "../data/towns.json";
 
 function RegionSelect(props) {
-    towns.sort(function(a,b) {return (a["city"] > b["city"]) ? 1 : ((b["city"] > a["city"]) ? -1 : 0);} );
+    towns.sort(function (a, b) { return (a["city"] > b["city"]) ? 1 : ((b["city"] > a["city"]) ? -1 : 0); });
     //[coords, setCoords] = useState([]);
     const defaultTown = "Москва";
 
     const uniqueRegions = [...new Set(towns.map((item) => item["region"]))];
-    uniqueRegions.sort(function(a,b) {return (a > b) ? 1 : ((b > a) ? -1 : 0);} );
+    uniqueRegions.sort(function (a, b) { return (a > b) ? 1 : ((b > a) ? -1 : 0); });
     console.log("uniq regions", uniqueRegions);
+    const regionSelectId = useId();
 
     function onSelect(event) {
         const selectedIndex = event.target.options.selectedIndex;
@@ -26,7 +27,7 @@ function RegionSelect(props) {
     //const [selected, changeSelected] = useState(false);
     return (
         <ul>
-            <label className="search-label">Укажите ваш регион:</label>
+            <label className="search-label" htmlFor={regionSelectId}>Укажите ваш регион:</label>
             {/* <input
                 list="towns"
                 name="townsChoice"
@@ -39,7 +40,7 @@ function RegionSelect(props) {
                     <option key={town["fias_id"]} value={town["city"]}></option>
                 ))}
             </datalist> */}
-            <select name="region-select" id="region-select" onChange={onSelect}>
+            <select name="region-select" id={regionSelectId} onChange={onSelect}>
                 {uniqueRegions.map((region) => (
                     <option key={region} id={region}>{region}</option>
                 ))}

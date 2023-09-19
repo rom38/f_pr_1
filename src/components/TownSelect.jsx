@@ -5,10 +5,10 @@ import "../styles/TownSelect.css";
 import towns from "../data/towns.json";
 
 function TownSelect(props) {
-    towns.sort(function(a,b) {return (a["city"] > b["city"]) ? 1 : ((b["city"] > a["city"]) ? -1 : 0);} );
+    towns.sort(function (a, b) { return (a["city"] > b["city"]) ? 1 : ((b["city"] > a["city"]) ? -1 : 0); });
     const townsIdDict = {};
-    towns.map((item)=>{return townsIdDict[item["fias_id"]]=item;});
-    const [coords, setCoords] = useState([52,52]);
+    towns.map((item) => { return townsIdDict[item["fias_id"]] = item; });
+    const [coords, setCoords] = useState([52, 52]);
     const [townSelected, setTownSelected] = useState(townsIdDict["cd4477e8-3335-442a-a0a4-9429a52f5c52"]);
     const defaultTown = "Байкальск";
 
@@ -16,6 +16,7 @@ function TownSelect(props) {
     const uniqueFederals = [
         ...new Set(towns.map((item) => item["federal_district"])),
     ];
+    const townSelectId = useId();
     function onSelect(event) {
         const selectedIndex = event.target.options.selectedIndex;
         console.log(event.target.options[selectedIndex]);
@@ -23,7 +24,7 @@ function TownSelect(props) {
         // const townSelected = townsIdDict[idTownSelected];
         setTownSelected(townsIdDict[idTownSelected]);
         console.log("event from input id", idTownSelected);
-        console.log("coords", `${townSelected["geo_lat"]} ${townSelected["geo_lon"]}` )
+        console.log("coords", `${townSelected["geo_lat"]} ${townSelected["geo_lon"]}`);
         // console.log("event from input", event.target.value);
 
 
@@ -31,7 +32,7 @@ function TownSelect(props) {
     //const [selected, changeSelected] = useState(false);
     return (
         <ul>
-            <label className="search-label">Укажите ваш город, в поле работает поиск:</label>
+            <label className="search-label" htmlFor={townSelectId}>Выберете Ваш город:</label>
             {/* <input
                 list="towns"
                 name="townsChoice"
@@ -44,7 +45,7 @@ function TownSelect(props) {
                     <option key={town["fias_id"]} value={town["city"]}></option>
                 ))}
             </datalist> */}
-            <select name="town-select" id="town-select" onChange={onSelect} value={townSelected["city"]}>
+            <select name="town-select" id={townSelectId} onChange={onSelect} value={townSelected["city"]}>
                 {towns.map((town) =>
                     <option key={town["fias_id"]} id={town["fias_id"]}>{town["city"]}</option>
                 )}
