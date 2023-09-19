@@ -5,7 +5,7 @@ import TownSelect from "./TownSelect";
 import RegionSelect from "./RegionSelect";
 import towns_orig from "../data/towns.json";
 
-function PlaceSelect({townSelected, setTownSelected}) {
+function PlaceSelect({ townSelected, setTownSelected }) {
     towns_orig.sort(function (a, b) { return (a["city"] > b["city"]) ? 1 : ((b["city"] > a["city"]) ? -1 : 0); });
     const townsIdDict = {};
     towns_orig.map((item) => { return townsIdDict[item["fias_id"]] = item; });
