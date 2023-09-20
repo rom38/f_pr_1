@@ -5,6 +5,7 @@ import Alerts from "./Alerts";
 import PlaceSelect from "./PlaceSelect";
 import MapYandView from "./MapYandView";
 import TownSelect from "./TownSelect";
+import Weather from "./Weather";
 
 function Main() {
     const alertText = "Ужас!";
@@ -30,7 +31,9 @@ function Main() {
             <h1>Здравствуй пользователь!</h1>
             <Alerts>{alertText}</Alerts>
             <PlaceSelect townSelected={townSelected} townUpdate={townUpdate} setPlaceCoordinates={setPlaceCoordinates} />
+            <Weather placeCoordinates={placeCoordinates} setPlaceCoordinates={setPlaceCoordinates} />
             <MapYandView placeCoordinates={placeCoordinates} />
+
 
             {/* <Countries /> */}
         </main>

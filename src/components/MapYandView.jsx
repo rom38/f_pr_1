@@ -24,7 +24,6 @@ function MapYandView({ townSelected, placeCoordinates }) {
     const getPlaceMarkCoordinates = (e) => {
         let coord = e.get("target").geometry.getCoordinates();
         console.log("coord placemark", coord);
-        console.log("placemark obj", e.get("target"));
         let resp = maps.geocode(coord);
         resp.then((res) => {
             setAddress(res.geoObjects.get(0).getAddressLine());
