@@ -40,13 +40,9 @@ function TownSelect({ towns, townSelected, townUpdate }) {
                     <option key={town["fias_id"]} id={town["fias_id"]}>{town["city"]}</option>
                 )}
             </select>
-            <label>Координаты:
+            <label>Координаты города:
                 <span>{`Широта: ${townSelected["geo_lat"]}, Долгота: ${townSelected["geo_lon"]}`}</span>
             </label>
-
-            {towns.slice(0, 7).map((town) => (
-                <li key={town["fias_id"]}>{town["city"]}</li>
-            ))}
         </>
     );
 }

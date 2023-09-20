@@ -1,0 +1,11 @@
+.Day {
+    width: 15%;
+    min-width: 125px;
+    max-width: 200px;
+    /* float: left; */
+    margin-left: 10px;
+    margin-right: 10px;
+    border: 1px solid black;
+    box-shadow: 0 5px 10px gray;
+    background-color: aliceblue;
+}
