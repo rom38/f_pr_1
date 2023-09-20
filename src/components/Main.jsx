@@ -4,6 +4,7 @@ import Countries from "./Countries";
 import Alerts from "./Alerts";
 import PlaceSelect from "./PlaceSelect";
 import MapYandView from "./MapYandView";
+import TownSelect from "./TownSelect";
 
 function Main() {
     const alertText = "Ужас!";
@@ -16,12 +17,20 @@ function Main() {
         "geo_lon": 104.1487532
     };
     const [townSelected, setTownSelected] = useState(defaultTown);
+    const [placeCoordinates, setPlaceCoordinates] = useState([defaultTown["geo_lat"], defaultTown["geo_lon"]]);
+    const townUpdate = (town) => {
+        setTownSelected(town);
+        setPlaceCoordinates([town["geo_lat"], town["geo_lon"]]);
+        console.log("update town", townSelected);
+        console.log("update coods", placeCoordinates);
+    };
+
     return (
         <main>
-            <h1>Hello World</h1>
+            <h1>Здравствуй пользователь!</h1>
             <Alerts>{alertText}</Alerts>
-            <PlaceSelect townSelected={townSelected} setTownSelected={setTownSelected} />
-            <MapYandView townSelected={townSelected}/>
+            <PlaceSelect townSelected={townSelected} townUpdate={townUpdate} setPlaceCoordinates={setPlaceCoordinates} />
+            <MapYandView placeCoordinates={placeCoordinates} />
 
             {/* <Countries /> */}
         </main>

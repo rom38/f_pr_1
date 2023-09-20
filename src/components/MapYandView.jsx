@@ -1,29 +1,34 @@
 import { useState } from "react";
 import { YMaps, Map, Placemark, ZoomControl, withYMaps } from "@pbe/react-yandex-maps";
 
-function MapYandView({ townSelected }) {
+function MapYandView({ townSelected, placeCoordinates }) {
     const defaultState = {
-        center: [52.751574, 102.573856],
+        center: placeCoordinates,
         zoom: 5,
 
     };
     const [maps, setMaps] = useState(null);
     const [address, setAddress] = useState("");
-    const [placeMarkCoordinates, setPlaceMarkCoordinates] = useState([townSelected["geo_lat"], townSelected["geo_lon"]]);
+    // const [placeCoordinates, setPlaceCoordinates] = useState([townSelected["geo_lat"], townSelected["geo_lon"]]);
 
     const getGeoLocation = (e) => {
         let coord = e.get("target").getCenter();
         console.log("map center", coord);
 
-        let resp = maps.geocode(coord);
-        resp.then((res) => {
-            setAddress(res.geoObjects.get(0).getAddressLine());
-        });
+        // let resp = maps.geocode(coord);
+        // resp.then((res) => {
+        //     setAddress(res.geoObjects.get(0).getAddressLine());
+        // });
     };
 
     const getPlaceMarkCoordinates = (e) => {
         let coord = e.get("target").geometry.getCoordinates();
         console.log("coord placemark", coord);
+        console.log("placemark obj", e.get("target"));
+        let resp = maps.geocode(coord);
+        resp.then((res) => {
+            setAddress(res.geoObjects.get(0).getAddressLine());
+        });
 
     };
 
@@ -37,12 +42,15 @@ function MapYandView({ townSelected }) {
                 <Map width="100%" defaultState={defaultState}
                     onBoundsChange={(ymaps) => getGeoLocation(ymaps)}
                     modules={["geolocation", "geocode"]}
-                    onLoad={(ymaps) => onLoad(ymaps)}>
-                    <Placemark geometry={placeMarkCoordinates} options={{ draggable: true }} onDragEnd={(event) => getPlaceMarkCoordinates(event)} />
+                    onLoad={(ymaps) => onLoad(ymaps)}
+                    state={{ center: placeCoordinates, zoom: 5 }}
+                >
+                    <Placemark geometry={placeCoordinates} options={{ draggable: true }} onDragEnd={(event) => getPlaceMarkCoordinates(event)}
+                        onGeometryChange={(event) => getPlaceMarkCoordinates(event)} />
                     <ZoomControl options={{ position: { bottom: 35, right: 10 } }} />
                 </Map>
             </div>
-            <p>ggbdfdfdf {address}</p>
+            <p>Вычисленный адрес: {address}</p>
         </YMaps>
     );
 }

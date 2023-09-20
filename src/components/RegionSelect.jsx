@@ -13,7 +13,7 @@ function RegionSelect({ regionSelected, updateRegion }) {
     console.log("uniq regions", uniqueRegions);
     const regionSelectId = useId();
 
-    function onSelect(event) {
+    const onSelect = (event) => {
         const selectedIndex = event.target.options.selectedIndex;
         console.log(event.target.options[selectedIndex]);
         const idRegionSelected = event.target.options[selectedIndex].id;
@@ -27,14 +27,14 @@ function RegionSelect({ regionSelected, updateRegion }) {
     }
     //const [selected, changeSelected] = useState(false);
     return (
-        <ul>
+        <>
             <label className="search-label" htmlFor={regionSelectId}>Укажите ваш регион:</label>
             <select name="region-select" id={regionSelectId} onChange={onSelect} value={regionSelected}>
                 {uniqueRegions.map((region) => (
                     <option key={region} id={region}>{region}</option>
                 ))}
             </select>
-        </ul>
+        </>
     );
 }
 

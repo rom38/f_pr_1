@@ -4,7 +4,7 @@ import PropTypes, { array, object } from "prop-types";
 import "../styles/TownSelect.css";
 //import towns from "../data/towns.json";
 
-function TownSelect({ towns, townSelected, setTownSelected }) {
+function TownSelect({ towns, townSelected, townUpdate }) {
     // towns.sort(function (a, b) { return (a["city"] > b["city"]) ? 1 : ((b["city"] > a["city"]) ? -1 : 0); });
     console.log("towns", towns);
 
@@ -19,21 +19,21 @@ function TownSelect({ towns, townSelected, setTownSelected }) {
     //     ...new Set(towns.map((item) => item["federal_district"])),
     // ];
     const townSelectId = useId();
-    function onSelect(event) {
+    const onSelect = (event) => {
         const selectedIndex = event.target.options.selectedIndex;
         console.log(event.target.options[selectedIndex]);
         const idTownSelected = event.target.options[selectedIndex].id;
         // const townSelected = townsIdDict[idTownSelected];
-        setTownSelected(townsIdDict[idTownSelected]);
+        townUpdate(townsIdDict[idTownSelected]);
         console.log("event from input id", idTownSelected);
         console.log("coords", `${townSelected["geo_lat"]} ${townSelected["geo_lon"]}`);
         // console.log("event from input", event.target.value);
 
 
-    }
+    };
     //const [selected, changeSelected] = useState(false);
     return (
-        <ul>
+        <>
             <label className="search-label" htmlFor={townSelectId}>Выберете Ваш город:</label>
             <select name="town-select" id={townSelectId} onChange={onSelect} value={townSelected["city"]}>
                 {towns.map((town) =>
@@ -47,7 +47,7 @@ function TownSelect({ towns, townSelected, setTownSelected }) {
             {towns.slice(0, 7).map((town) => (
                 <li key={town["fias_id"]}>{town["city"]}</li>
             ))}
-        </ul>
+        </>
     );
 }
 
