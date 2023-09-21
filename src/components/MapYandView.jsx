@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { YMaps, Map, Placemark, ZoomControl, withYMaps } from "@pbe/react-yandex-maps";
 
 function MapYandView({ townSelected, placeCoordinates, setPlaceCoordinates }) {
@@ -17,10 +17,6 @@ function MapYandView({ townSelected, placeCoordinates, setPlaceCoordinates }) {
         console.log("map center", coord);
         //e.get("target").geoObjects.get(0).geometry.setCoordinates(coord);
 
-        // let resp = maps.geocode(coord);
-        // resp.then((res) => {
-        //     setAddress(res.geoObjects.get(0).getAddressLine());
-        // });
     };
 
     const changeMapCenter = (e) => {
@@ -43,6 +39,10 @@ function MapYandView({ townSelected, placeCoordinates, setPlaceCoordinates }) {
 
     const onLoad = (map) => {
         setMaps(map);
+        let resp = map.geocode(placeCoordinates);
+        resp.then((res) => {
+            setAddress(res.geoObjects.get(0).getAddressLine());
+        });
     };
 
     return (
