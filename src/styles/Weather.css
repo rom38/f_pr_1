@@ -1,0 +1,10 @@
+.weather-items {
+    /* color: white;
+    background: black; */
+    font-size: 1rem;
+    /* height: 80px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
