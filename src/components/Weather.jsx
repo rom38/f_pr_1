@@ -58,7 +58,7 @@ function Weather({ placeCoordinates, setPlaceCoordinates }) {
     return (
         <>
             <div>
-                <label className="search-label">Текущие координаты <br /> браузера:</label>
+                <label className="search-label">Текущие координаты <br /> устройства:</label>
                 <CoordWidget lat={lat} lon={lon} />
                 <button className="button-get-coord" onClick={() => updateCoordinates(true)}>
                     Получить и установить <br /> текущие координаты:
