@@ -32,7 +32,7 @@ function Main() {
             <Alerts>{alertText}</Alerts>
             <PlaceSelect townSelected={townSelected} townUpdate={townUpdate} setPlaceCoordinates={setPlaceCoordinates} />
             <Weather placeCoordinates={placeCoordinates} setPlaceCoordinates={setPlaceCoordinates} />
-            <MapYandView placeCoordinates={placeCoordinates} />
+            <MapYandView placeCoordinates={placeCoordinates} setPlaceCoordinates={setPlaceCoordinates} />
 
 
             {/* <Countries /> */}

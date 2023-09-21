@@ -6,7 +6,7 @@ const Day = ({ date, weather, high, low }) => {
             <h3>{date}</h3>
             <p>{weather}</p>
             <p>макс. темп.: {high}&deg;C</p>
-            <p>мин. темп.:{low}&deg;C</p>
+            <p>мин. темп.: {low}&deg;C</p>
         </div>
     );
 };

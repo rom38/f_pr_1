@@ -59,7 +59,13 @@ function Weather({ placeCoordinates, setPlaceCoordinates }) {
             setPlaceCoordinates([position.coords.latitude, position.coords.longitude]);
         });
 
-    }
+    };
+    const dayFromDt = (dt) => new Date(dt * 1000);
+    const getWeekDay = (date) => {
+        const days = ["ВС", "ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ"];
+        return days[date.getDay()];
+    };
+
 
 
 
@@ -78,7 +84,7 @@ function Weather({ placeCoordinates, setPlaceCoordinates }) {
                     <Day date={"Сегодня"}
                         weather={weatherData["current"]["weather"][0]["description"]} high={weatherData["current"]["high"]} low={13} />
                     {weatherData["daily"].slice(1, 6).map((day) =>
-                        <Day key={day["dt"]} date={new Date(day["dt"] * 1000).toLocaleDateString()}
+                        <Day key={day["dt"]} date={`${dayFromDt(day["dt"]).toLocaleDateString()}, ${getWeekDay(dayFromDt(day["dt"]))}`}
                             weather={day["weather"][0]["description"]}
                             high={day["temp"]["max"]}
                             low={day["temp"]["min"]} />
