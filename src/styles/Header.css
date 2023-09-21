@@ -1,13 +1,15 @@
 header {
-    color: white;
-    background: black;
-    font-size: 1rem;
-    height: 80px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-header .some-button  {
+  color: white;
+  padding: 1%;
+  background: black;
+  font-size: 1rem;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header .some-button {
   padding: 10px, 15px;
   border-radius: 15px;
   border: 1px solid gray;

@@ -49,7 +49,7 @@ function MapYandView({ townSelected, placeCoordinates, setPlaceCoordinates }) {
 
     return (
         <YMaps query={{ lang: "ru_RU", apikey: "0e953c44-2ab2-4a01-87ac-dced95cbcb4c" }}>
-            <div className="App">
+            <div className="app">
                 <div><h3 className="search-label">Перемещайте маркер для получения погоды по координатам маркера</h3></div>
                 <label className="search-label">Адрес маркера: {address}</label>
                 <div>     <label className="search-label">Координаты <br /> маркера:</label>
