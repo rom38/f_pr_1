@@ -73,15 +73,23 @@ function Weather({ placeCoordinates, setPlaceCoordinates }) {
             >
                 Получить координаты браузера
             </button>
-            {(typeof weatherData["current"] != 'undefined') ? (<>
-                <Day date={new Date(weatherData["current"]["dt"] * 1000).toLocaleDateString()}
-                    weather={weatherData["current"]["weather"][0]["description"]} high={weatherData["current"]["high"]} low={13} />
-                <Day date={new Date(weatherData["daily"][1]["dt"] * 1000).toLocaleDateString()}
-                    weather={weatherData["daily"][0]["weather"][0]["description"]} high={weatherData["daily"][0]["temp"]["max"]} low={weatherData["daily"][0]["temp"]["min"]} /></>
-            ) : (
-                <div></div>
-            )}
+            <div className="weather-items">
+                {(typeof weatherData["current"] != "undefined") ? (<>
+                    <Day date={"Сегодня"}
+                        weather={weatherData["current"]["weather"][0]["description"]} high={weatherData["current"]["high"]} low={13} />
+                    {weatherData["daily"].slice(1, 6).map((day) =>
+                        <Day key={day["dt"]} date={new Date(day["dt"] * 1000).toLocaleDateString()}
+                            weather={day["weather"][0]["description"]}
+                            high={day["temp"]["max"]}
+                            low={day["temp"]["min"]} />
 
+
+                    )}
+                </>
+                ) : (
+                    <div></div>
+                )}
+            </div>
         </>
     );
 }
