@@ -1,6 +1,7 @@
 import { Component, Fragment, useState, useId } from "react";
 import { Button } from "react-bootstrap";
 import PropTypes, { array, object } from "prop-types";
+import CoordWidget from "./CoordWidget";
 import "../styles/TownSelect.css";
 
 function TownSelect({ towns, townSelected, townUpdate }) {
@@ -26,9 +27,10 @@ function TownSelect({ towns, townSelected, townUpdate }) {
                     <option key={town["fias_id"]} id={town["fias_id"]}>{town["city"]}</option>
                 )}
             </select>
-            <label>Координаты города:
-                <span>{`Широта: ${townSelected["geo_lat"]}, Долгота: ${townSelected["geo_lon"]}`}</span>
-            </label>
+            <div>
+                <label className="search-label">Координаты <br />города: </label>
+                <CoordWidget lat={townSelected["geo_lat"]} lon={townSelected["geo_lon"]} />
+            </div>
         </>
     );
 }

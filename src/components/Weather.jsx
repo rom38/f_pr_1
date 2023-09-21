@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import Day from "./Day";
 import "../styles/Weather.css";
 import axios from "axios";
+import CoordWidget from "./CoordWidget";
 
 function Weather({ placeCoordinates, setPlaceCoordinates }) {
     let first = useRef(true);
@@ -20,7 +21,7 @@ function Weather({ placeCoordinates, setPlaceCoordinates }) {
             });
             first.current = false;
         }
-    }, [placeCoordinates]);
+    }, [lat, lon]);
 
     useEffect(() => {
         axios.get("https://api.openweathermap.org/data/3.0/onecall", {
@@ -57,17 +58,16 @@ function Weather({ placeCoordinates, setPlaceCoordinates }) {
     return (
         <>
             <div>
-                <label>Текущие координаты браузера:</label>
-                {/* <span>широта: {placeCoordinates[0]}, долгота: {placeCoordinates[1]}</span> */}
-                <label>широта: {lat}, долгота: {lon}</label>
-                <button onClick={() => updateCoordinates(true)}>
+                <label className="search-label">Текущие координаты <br /> браузера:</label>
+                <CoordWidget lat={lat} lon={lon} />
+                <button className="button-get-coord" onClick={() => updateCoordinates(true)}>
                     Получить и установить <br /> текущие координаты:
                 </button>
             </div>
             <div className="weather-items">
                 {(typeof weatherData["current"] != "undefined") ? (<>
                     <Day date={"Сегодня"}
-                        weather={weatherData["current"]["weather"][0]["description"]} high={weatherData["current"]["high"]} low={13} />
+                        weather={weatherData["current"]["weather"][0]["description"]} temp={weatherData["current"]["temp"]} />
                     {weatherData["daily"].slice(1, 6).map((day) =>
                         <Day key={day["dt"]} date={`${dayFromDt(day["dt"]).toLocaleDateString()}, ${getWeekDay(dayFromDt(day["dt"]))}`}
                             weather={day["weather"][0]["description"]}

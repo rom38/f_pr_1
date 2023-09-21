@@ -1,0 +1,10 @@
+.coord-widget {
+    margin: 10px;
+    border: 1px solid black;
+    box-shadow: 0 5px 15px gray;
+    background-color: aliceblue;
+    padding: 5px;
+    font-family: sans-serif;
+    text-align: left;
+    display: inline-block;
+}
