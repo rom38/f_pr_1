@@ -1,14 +1,10 @@
 import { useState } from "react";
 import "../styles/Main.css";
-import Countries from "./Countries";
-import Alerts from "./Alerts";
 import PlaceSelect from "./PlaceSelect";
 import MapYandView from "./MapYandView";
-import TownSelect from "./TownSelect";
 import Weather from "./Weather";
 
 function Main() {
-    const alertText = "Ужас!";
     const defaultTown = {
         "federal_district": "Сибирский",
         "region": "Иркутская",
@@ -28,14 +24,9 @@ function Main() {
 
     return (
         <main>
-            <h1>Здравствуй пользователь!</h1>
-            <Alerts>{alertText}</Alerts>
             <PlaceSelect townSelected={townSelected} townUpdate={townUpdate} setPlaceCoordinates={setPlaceCoordinates} />
             <Weather placeCoordinates={placeCoordinates} setPlaceCoordinates={setPlaceCoordinates} />
             <MapYandView placeCoordinates={placeCoordinates} setPlaceCoordinates={setPlaceCoordinates} />
-
-
-            {/* <Countries /> */}
         </main>
     );
 }

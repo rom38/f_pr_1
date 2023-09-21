@@ -1,4 +1,4 @@
-import { Component, Fragment, useState, useId, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import Day from "./Day";
 import "../styles/Weather.css";
 import axios from "axios";
@@ -6,32 +6,22 @@ import axios from "axios";
 function Weather({ placeCoordinates, setPlaceCoordinates }) {
     let first = useRef(true);
     const [weatherData, setWeatherData] = useState([]);
+    const [lat, setLat] = useState();
+    const [lon, setLon] = useState();
+
 
     useEffect(() => {
         if (first.current) {
-            let lat;
-            let lon;
+
             navigator.geolocation.getCurrentPosition(function (position) {
-                lat = position.coords.latitude;
-                lon = position.coords.longitude;
-                setPlaceCoordinates([lat, lon]);
+                setLat(position.coords.latitude);
+                setLon(position.coords.longitude);
+                //setPlaceCoordinates([lat, lon]);
             });
             first.current = false;
         }
     }, [placeCoordinates]);
 
-
-    // let lat;
-    // let lon;
-    // useEffect(() => {
-
-    //     navigator.geolocation.getCurrentPosition(function (position) {
-    //         setPlaceCoordinates([position.coords.latitude, position.coords.longitude]);
-    //     });
-
-    //     console.log("Latitude is:", placeCoordinates[0]);
-    //     console.log("Longitude is:", placeCoordinates[1]);
-    // }, [placeCoordinates]);
     useEffect(() => {
         axios.get("https://api.openweathermap.org/data/3.0/onecall", {
             params: {
@@ -44,12 +34,10 @@ function Weather({ placeCoordinates, setPlaceCoordinates }) {
             }
         })
             .then(function (response) {
-                // обработка успешного запроса
                 console.log("weather", response.data);
                 setWeatherData(response.data);
             })
             .catch(function (error) {
-                // обработка ошибки
                 console.log(error);
             });
     }, [placeCoordinates]);
@@ -66,19 +54,16 @@ function Weather({ placeCoordinates, setPlaceCoordinates }) {
         return days[date.getDay()];
     };
 
-
-
-
-    //const [selected, changeSelected] = useState(false);
     return (
         <>
-            <label>Текущие координаты браузера:</label>
-            <div><span>широта: {placeCoordinates[0]}, долгота: {placeCoordinates[1]}</span></div>
-            <button
-                onClick={() => updateCoordinates(true)}
-            >
-                Получить координаты браузера
-            </button>
+            <div>
+                <label>Текущие координаты браузера:</label>
+                {/* <span>широта: {placeCoordinates[0]}, долгота: {placeCoordinates[1]}</span> */}
+                <label>широта: {lat}, долгота: {lon}</label>
+                <button onClick={() => updateCoordinates(true)}>
+                    Получить и установить <br /> текущие координаты:
+                </button>
+            </div>
             <div className="weather-items">
                 {(typeof weatherData["current"] != "undefined") ? (<>
                     <Day date={"Сегодня"}
